@@ -53,9 +53,10 @@
                 <div class="row" id="control-row">
                     <div class="col-xs-8">
                         <h4>Shark Attacks Marker Map
-                            <a href="index_2.html" target="_blank"><img src="data/images/choropleth_icon.jpeg" alt="choropleth icon" style="width:42px;height:42px;"></a>
+                            <a href="index_2.html" target="_blank" style="color:black;">| Shark Attacks Choropleth Map </a>
                         </h4>
-                        <p>(circles color - red: fatal cases, orange: non-fatal cases, yellow: unknown cases)</p>
+
+                        <p><i>(<span style="color:red">red</span> points: fatal cases, <span style="color:orange">orange</span>: non-fatal cases, <span style="color: #493F3F">gray</span>: unknown cases)</i></p>
                         <div id="map"></div>
                     </div>
                     <div class="col-xs-4 pie-chart">
@@ -120,6 +121,7 @@
                                 <tr class="header">
                                     <th>Country</th>
                                     <th>Area</th>
+                                    <th>Location</th>
                                     <th>Date</th>
                                     <th>Cause</th>
                                     <th>Activity</th>
@@ -277,6 +279,7 @@
                     injuryChart
                         .width(280)
                         .height(320)
+                        .ordinalColors(['#493F3F', 'red', 'orange'])
                         .dimension(injuryDim)
                         .group(injuryGroup)
                         .innerRadius(20)
@@ -308,6 +311,7 @@
                     seasonChart
                         .width(300)
                         .height(340)
+                        .ordinalColors(['green', 'orange', '#900000', '#037abf', '#493F3F'])
                         .dimension(seasonDim)
                         .group(seasonGroup)
                         .innerRadius(20)
@@ -431,9 +435,11 @@
                         .xUnits(dc.units.ordinal)
                         .elasticX(true)
                         .elasticY(true)
-                        .brushOn(true)
+                        .brushOn(false)
                         .centerBar(true)
-                        .barPadding(5)
+                        .barPadding(0.3)
+                        .outerPadding(1.2)
+                        .gap(30)
                         // .xAxisLabel('Continent')
                         .yAxisLabel('Count')
                         .margins({
@@ -442,14 +448,12 @@
                             bottom: 100,
                             left: 80
                         })
-                        .barPadding(0.3)
-                        .outerPadding(0.05)
                         // because of the x axix label, need to set the bootom margin a large number
                         .renderlet(function(chart) {
                             chart.selectAll("g.x text")
                                 // .attr('dx', '-30')
-                                .attr('dx', '-30')
-                                .attr('transform', "rotate(-35)");
+                                .attr('dx', '-35')
+                                .attr('transform', "rotate(-45)");
                         });
                     // continentCountBarChart.xAxis().tickValues(continentDim);
 
@@ -462,9 +466,8 @@
                         .xUnits(dc.units.ordinal)
                         .elasticX(true)
                         .elasticY(true)
-                        .brushOn(true)
+                        .brushOn(false)
                         .centerBar(true)
-                        .barPadding(5)
                         // .xAxisLabel('Injury Cause')
                         .yAxisLabel('Count')
                         .margins({
@@ -474,13 +477,14 @@
                             left: 80
                         })
                         .barPadding(0.3)
-                        .outerPadding(0.05)
+                        .outerPadding(1)
+                        .gap(20)
                         // because of the x axix label, need to set the bootom margin a large number
                         .renderlet(function(chart) {
                             chart.selectAll("g.x text")
                                 // .attr('dx', '-30')
-                                .attr('dx', '-30')
-                                .attr('transform', "rotate(-35)");
+                                .attr('dx', '-35')
+                                .attr('transform', "rotate(-45)");
                         });
                     // causeCountBarChart.xAxis().tickValues(d3.range(d["cause"].length()));
 
@@ -501,6 +505,9 @@
                             },
                             function(d) {
                                 return d["area"];
+                            },
+                            function(d) {
+                                return d["location"];
                             },
                             function(d) {
                                 return d["date_revised"];
@@ -538,6 +545,7 @@
                                 var latitude = d["location_georeferenced_lat"];
                                 var country = d["country_captalized"];
                                 var area = d["area"];
+                                var location = d["location"]
                                 var year = d["year"];
                                 var link = d["href_formula"];
                                 var fatal = d["fatal"];
@@ -569,7 +577,7 @@
                                 } else if (fatal == "non-fatal") {
                                     fillColor_Var = "orange";
                                 } else {
-                                    fillColor_Var = "yellow";
+                                    fillColor_Var = "#493F3F";
                                 }
 
                                 var marker = L.circleMarker([latitude, longitude], {
@@ -585,6 +593,7 @@
                                 // marker.bindPopup("<p>" + name + " " + loc.brewery_city + " " + loc.brewery_state + "</p>");
                                 marker.bindPopup("<b> Country: </b>" + country + "<br>" +
                                     "<b> Area: </b>" + area + "<br>" +
+                                    "<b> Location: </b>" + location + "<br>" +
                                     "<b> Year: </b>" + year + "<br>" +
                                     "<b> Injury: </b>" + fatal + "<br>" +
                                     // "Link: " + link + "<br>");;
