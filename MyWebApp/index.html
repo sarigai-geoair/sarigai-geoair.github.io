@@ -31,7 +31,7 @@
             <a id="all" href="#">Reset All</a>
             </span>
             </small>
-                            <button type="button" class="btn btn-info pull-right" data-toggle="modal" data-target="#myModal">About the project</button>
+                            <button type="button" class="btn btn-default info pull-right" data-toggle="modal" data-target="#myModal">About the project</button>
                         </h4>
                     </div>
                 </div>
@@ -53,10 +53,10 @@
                 <div class="row" id="control-row">
                     <div class="col-xs-8">
                         <h4>Shark Attacks Marker Map
-                            <a href="index_2.html" target="_blank" style="color:black;">| Shark Attacks Choropleth Map </a>
+                            <a href="index_2.html" style="color:black;">| Shark Attacks Choropleth Map </a>
                         </h4>
 
-                        <p><i>(<span style="color:red">red</span> points: fatal cases, <span style="color:orange">orange</span>: non-fatal cases, <span style="color: #493F3F">gray</span>: unknown cases)</i></p>
+                        <p><i>(<span style="color:red">red</span> points: fatal cases; <span style="color:orange">orange</span>: non-fatal cases; <span style="color: #493F3F">gray</span>: unknown cases)</i></p>
                         <div id="map"></div>
                     </div>
                     <div class="col-xs-4 pie-chart">
@@ -311,7 +311,7 @@
                     seasonChart
                         .width(300)
                         .height(340)
-                        .ordinalColors(['green', 'orange', '#900000', '#037abf', '#493F3F'])
+                        .ordinalColors(['#88d670', '#ff4e50', '#DBA72E', '#034AA6', '#493F3F'])
                         .dimension(seasonDim)
                         .group(seasonGroup)
                         .innerRadius(20)
