@@ -1,3 +1,32 @@
+text {
+    font-size: 16px;
+}
+
+#control-row {
+    padding-bottom: 20px;
+}
+
+.container-fluid {
+    padding-left: 40px;
+    padding-right: 40px;
+    margin-top: 15px;
+}
+
+a {
+    cursor: pointer
+}
+
+
+/* 
+h4,
+h2 {
+    font-family: Helvetica;
+} */
+
+h4 {
+    margin-top: 4.4px;
+}
+
 #wrapper {
     width: 960px;
     margin: -30px auto 0;
@@ -37,14 +66,14 @@
 }
 
 .country {
-    fill: steelblue;
+    fill: rgb(179, 96, 28);
     stroke: white;
 }
 
 #play,
 #clock {
     position: absolute;
-    top: 140px;
+    top: 200px;
 }
 
 #play {
