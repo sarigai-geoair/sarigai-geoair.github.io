@@ -49,15 +49,20 @@
 
                 <div class="row" id="control-row">
                     <div class="col-xs-8">
-                        <h4>Shark Attacks Choropleth Map
+                        <!-- <h4>Shark Attacks Choropleth Map
                             <a href="index.html" style="color:black;">| Shark Attacks Marker Map </a>
+                        </h4> -->
+
+                        <h4>
+                            <a href="index.html">Shark Attacks Marker Map</a> | Shark Attacks Choropleth Map </a>
                         </h4>
                     </div>
                 </div>
                 <div class="row" id="control-row">
+                    <p><i><b>5 A.D. to 2018</b></i></p>
                     <div id="wrapper">
                         <div id="map"></div>
-                        <button id="play">play</button>
+                        <button id="play"><b>play</b></button>
                         <span id="clock">year</span>
                     </div>
 
@@ -174,14 +179,27 @@
 
                         }
 
+                        //Dr Yang edited code starts HERE
                         function getColor(valueIn, valuesIn) {
 
                             var color = d3.scale.linear() // create a linear scale
                                 .domain([valuesIn[0], valuesIn[1]]) // input uses min and max values
-                                .range([.3, 1]); // output for opacity between .3 and 1 %
+                                // .range([.3, 1]); // output for opacity between .3 and 1 %
+                                .range([.15, 1]); // output for opacity between .15 and 1 %
 
-                            return color(valueIn); // return that number to the caller
+                            console.log(color(valueIn)); //Dr Yang added
+                            console.log(typeof(color(valueIn))); //Dr Yang added
+
+                            var colorChecker = color(valueIn); //Dr Yang added
+                            console.log(typeof(colorChecker)); //Dr Yang added
+                            if (isNaN(colorChecker)) { //Dr Yang added
+                                return color(0); //Dr Yang added
+                            } //Dr Yang added
+                            else { //Dr Yang added
+                                return color(valueIn); // return that number to the caller
+                            } //Dr Yang added
                         }
+                        //Dr Yang edited code ends HERE
 
                         function getDataRange() {
                             // function loops through all the data values from the current data attribute
